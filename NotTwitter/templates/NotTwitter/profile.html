@@ -56,22 +56,61 @@
                         </h1>
                         <ul>
                             {% for following in profile.followed.all %}
-                            <div class="list-title is-active">
-                                <a href="{% url 'NotTwitter:profile' following.id %}">
-                                    <li class="list-item"> {{ following }} </li>
-                                </a>
+                            <div class="block">
+                                <div class="card">
+                                    <a href="{% url 'NotTwitter:profile' following.id %}">
+                                        <div class="card-content">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-48x48">
+                                                        <img src="https://bulma.io/images/placeholders/96x96.png"
+                                                            alt="Placeholder image">
+                                                    </figure>
+                                                </div>
+                                                <div class="media-content">
+                                                    <p class="title is-4">
+                                                        {{ following.user.username }}
+                                                    </p>
+                                                    <p class="subtitle is-6">
+                                                        @{{ following.user.username|lower }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             {% endfor %}
                         </ul>
+                        <br>
                         <h1 class="title is-3 is-bold">
                             {{profile.user.username}} é seguido por:
                         </h1>
                         <ul>
                             {% for following in profile.followed_by.all %}
-                            <div class="list-title is-active">
-                                <a href="{% url 'NotTwitter:profile' following.id %}">
-                                    <li class="list-item"> {{ following }} </li>
-                                </a>
+                            <div class="block">
+                                <div class="card">
+                                    <a href="{% url 'NotTwitter:profile' following.id %}">
+                                        <div class="card-content">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-48x48">
+                                                        <img src="https://bulma.io/images/placeholders/96x96.png"
+                                                            alt="Placeholder image">
+                                                    </figure>
+                                                </div>
+                                                <div class="media-content">
+                                                    <p class="title is-4">
+                                                        {{ following.user.username }}
+                                                    </p>
+                                                    <p class="subtitle is-6">
+                                                        @{{ following.user.username|lower }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             {% endfor %}
                         </ul>
