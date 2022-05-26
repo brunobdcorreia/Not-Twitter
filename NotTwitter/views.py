@@ -1,8 +1,25 @@
-from django.shortcuts import render
-from NotTwitter.models import Profile
+from django.shortcuts import render, redirect
+from NotTwitter.models import Profile, NotATweet
+from NotTwitter.forms import NotATweetForm
 
 def dashboard(request):
-    return render(request=request, template_name='base.html')
+    form = NotATweetForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            not_tweet = form.save(commit=False)
+            not_tweet.user = request.user
+            not_tweet.save()
+            return redirect('NotTwitter:dashboard')
+
+    followed_not_tweets = NotATweet.objects.filter(
+        user__profile__in=request.user.profile.followed.all()
+    ).order_by('-created_at')
+
+    return render(
+        request, 
+        'NotTwitter/dashboard.html', 
+        {'form' : form, 'not_tweets' : followed_not_tweets}
+    )
 
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)

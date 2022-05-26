@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+    {% for nt in not_tweets %}
+    <div class="box">
+        {{nt.body}}
+        <span class="is-small has-text-grey-light">
+            ({{ nt.created_at }} by {{ nt.user.username }})
+        </span>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="column is-one-third">
+    <div class="block">
+        <a href="{% url 'NotTwitter:profile_list' %} ">
+            <button class="button is-dark is-outlined is-fullwidth">
+                Todos os perfis
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <a href="{% url 'NotTwitter:profile' request.user.profile.id %} ">
+            <button class="button is-info is-light is-outlined is-fullwidth">
+                Meu Perfil
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <div class="block">
+            <h2 class="title is-2">Adicione um NãoTweet</p>
+        </div>
+        <div class="block">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button class="button is-success is-fullwidth is-medium mt-5" type="submit">NãoTwittar
+
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}
