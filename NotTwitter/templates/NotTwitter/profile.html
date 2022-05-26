@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+    <section class="hero is-default is-bold">
+        <div class="hero-body">
+            <div class="container ">
+                <div class="columns is-vcentered">
+                    <div class="column is-10 is-offset-1">
+                        <h1 class="title is-2 is-bold">
+                            NotTweets de {{profile.user.username}}
+                        </h1>
+                        <form method="post"></form>
+                        {% csrf_token %}
+                        <div class="buttons has-addons">
+
+                            {% if profile in user.profile.followed.all %}
+
+                            <button class="button is-success is-static">Seguir</button>
+
+                            <button class="button is-danger" name="follow" value="unfollow">Deixar de seguir</button>
+
+                            {% else %}
+
+                            <button class="button is-success" name="follow" value="follow">Seguir</button>
+
+                            <button class="button is-danger is-static">Deixar de seguir</button>
+
+                            {% endif %}
+
+                        </div>
+                        </form>
+                        <div class="content">
+                            {% for not_tweet in profile.user.NotTweets.all %}
+                            <div class="box">
+                                {{ not_tweet.body }}
+                                <span class="is-small has-text-grey-light">
+                                    ({{ not_tweet.created_at }})
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <br>
+                    </div>
+                    <div class="column is-7 is-offset-2">
+                        <div class="block">
+                            <a href="{% url 'NotTwitter:profile_list' %}">
+                                <button class="button is-dark is-outlined is-fullwidth">
+                                    Todos os perfis
+                                </button>
+                            </a>
+                        </div>
+                        <h1 class="title is-2 is-bold">
+                            {{profile.user.username}} segue:
+                        </h1>
+                        <ul>
+                            {% for following in profile.followed.all %}
+                            <div class="list-title is-active">
+                                <a href="{% url 'NotTwitter:profile' following.id %}">
+                                    <li class="list-item"> {{ following }} </li>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </ul>
+                        <h1 class="title is-3 is-bold">
+                            {{profile.user.username}} é seguido por:
+                        </h1>
+                        <ul>
+                            {% for following in profile.followed_by.all %}
+                            <div class="list-title is-active">
+                                <a href="{% url 'NotTwitter:profile' following.id %}">
+                                    <li class="list-item"> {{ following }} </li>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+{% endblock content %}
