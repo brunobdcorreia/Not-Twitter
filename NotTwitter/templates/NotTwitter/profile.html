@@ -11,25 +11,26 @@
                         <h1 class="title is-2 is-bold">
                             NotTweets de {{profile.user.username}}
                         </h1>
-                        <form method="post"></form>
-                        {% csrf_token %}
-                        <div class="buttons has-addons">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="buttons has-addons">
 
-                            {% if profile in user.profile.followed.all %}
+                                {% if profile in user.profile.followed.all %}
 
-                            <button class="button is-success is-static">Seguir</button>
+                                <button class="button is-success is-static">Seguir</button>
 
-                            <button class="button is-danger" name="follow" value="unfollow">Deixar de seguir</button>
+                                <button class="button is-danger" name="follow" value="unfollow">Deixar de
+                                    seguir</button>
 
-                            {% else %}
+                                {% else %}
 
-                            <button class="button is-success" name="follow" value="follow">Seguir</button>
+                                <button class="button is-success" name="follow" value="follow">Seguir</button>
 
-                            <button class="button is-danger is-static">Deixar de seguir</button>
+                                <button class="button is-danger is-static">Deixar de seguir</button>
 
-                            {% endif %}
+                                {% endif %}
 
-                        </div>
+                            </div>
                         </form>
                         <div class="content">
                             {% for not_tweet in profile.user.NotTweets.all %}

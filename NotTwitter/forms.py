@@ -5,7 +5,7 @@ class NotATweetForm(forms.ModelForm):
     body = forms.CharField(required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "O gato comeu sua língua?...",
+                "placeholder": "O gato comeu sua língua...?",
                 "class": "textarea is-info is-medium",
             }
         ),

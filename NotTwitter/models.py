@@ -20,6 +20,7 @@ class NotATweet(models.Model):
         User, related_name='NotTweets', on_delete=models.DO_NOTHING
     )
 
+    sentiment = None
     body = models.CharField(max_length=140)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -36,8 +36,8 @@ def profile(request, pk):
         data = request.POST
         action = data.get('follow')
         if action == 'follow':
-            current_user_profile.follows.add(profile)
+            current_user_profile.followed.add(profile)
         elif action == 'unfollow':
-            current_user_profile.follows.remove(profile)
+            current_user_profile.followed.remove(profile)
         current_user_profile.save()
     return render(request, 'NotTwitter/profile.html', {'profile' : profile})
